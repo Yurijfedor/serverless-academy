@@ -1,4 +1,3 @@
-const { log } = require("console");
 const { readFileSync, writeFileSync } = require("fs");
 const inquirer = require("inquirer");
 
