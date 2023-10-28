@@ -1,6 +1,6 @@
 # Telegram Weather Bot
 
-This Telegram bot provides weather forecasts for specific Vinnytsia.
+This Telegram bot provides weather forecasts for Vinnytsia.
 
 ## Getting Started
 
