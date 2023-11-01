@@ -17,6 +17,22 @@ const fetchData = async (url, retry = 3) => {
   return null;
 };
 
+const checkIsDone = (obj, endpoint) => {
+  if (obj && obj.hasOwnProperty("isDone")) {
+    if (obj.isDone === true) {
+      console.log(`[Success] ${endpoint}: isDone - True`);
+      trueCount++;
+    } else {
+      console.log(`[Success] ${endpoint}: isDone - False`);
+      falseCount++;
+    }
+  } else if (typeof obj === "object") {
+    for (const key in obj) {
+      checkIsDone(obj[key]);
+    }
+  }
+};
+
 const getIsDoneCount = async () => {
   let trueCount = 0;
   let falseCount = 0;
@@ -26,15 +42,7 @@ const getIsDoneCount = async () => {
 
     if (Array.isArray(data)) {
       data.forEach((item) => {
-        if (item && item.hasOwnProperty("isDone")) {
-          if (item.isDone === true) {
-            console.log(`[Success] ${endpoint}: isDone - True`);
-            trueCount++;
-          } else {
-            console.log(`[Success] ${endpoint}: isDone - False`);
-            falseCount++;
-          }
-        }
+        checkIsDone(item, endpoint);
       });
     } else {
       console.error(`[Error] ${endpoint}: Data is not an array.`);
